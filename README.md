@@ -10,7 +10,7 @@
 <p align="center">
   <a href="#🛠️-participer-au-développement">Participer</a> •
   <a href="#🕹️-technologies">Technologies</a> •
-  <a href="#🤠-crédits">Crédit</a> •
+  <a href="#🤠-crédits">Crédit</a>
 </p>
 
 ![Screenshot de l'application](/public/preview.png)

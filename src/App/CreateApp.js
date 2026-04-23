@@ -10,7 +10,7 @@ import { createOctopus } from "@world/CreateOctopus";
 import { createPostFx } from "@postfx/CreatePostFx";
 import { startRenderLoop } from "@loop/StartRenderLoop";
 
-const OCTOPUS_URL = "/OctopolisTry.glb";
+const OCTOPUS_URL = "/Octopolis.glb";
 
 /**
  * Orchestre tous les modules de la scène sous-marine.

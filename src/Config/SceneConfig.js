@@ -21,6 +21,9 @@ export const SCENE_CONFIG = {
       position: new THREE.Vector3(0, 0, 0),
       clearance: 15,
     },
+    animation: {
+      speed: 0.4,
+    },
   },
   controls: {
     minDistance: 50,

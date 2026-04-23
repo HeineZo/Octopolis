@@ -14,7 +14,7 @@ const buildResult = ({ ok, root, mixer, actionsByName, error }) => ({
   actionsByName,
   error,
   update: (delta) => {
-    if (mixer) mixer.update(delta);
+    if (mixer) mixer.update(delta * SCENE_CONFIG.octopus.animation.speed);
   },
 });
 
