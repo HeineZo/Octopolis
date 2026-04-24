@@ -13,8 +13,6 @@
   <a href="#🤠-crédits">Crédit</a>
 </p>
 
-![Démonstration](/public/misc/demo.mp4)
-
 ## 🛠️ Participer au développement
 
 ### Code
