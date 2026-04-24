@@ -2,10 +2,7 @@ import * as THREE from "three";
 import { SCENE_CONFIG } from "@config/SceneConfig";
 
 /**
- * Setup lumière 3 points sous-marine:
- * - Key light directionnelle bleutée qui vient de la surface
- * - Ambient froid pour le fill global
- * - Hemisphere light pour différencier sol/surface
+ * Setup lumière sous-marine
  */
 export const setupLights = (scene) => {
   const {
@@ -16,6 +13,7 @@ export const setupLights = (scene) => {
     directionalPosition,
     fillColor,
     fillIntensity,
+    sunset,
   } = SCENE_CONFIG.lights;
 
   const ambient = new THREE.AmbientLight(ambientColor, ambientIntensity);
@@ -37,9 +35,44 @@ export const setupLights = (scene) => {
   keyLight.shadow.bias = -0.0005;
   scene.add(keyLight);
 
-  const hemi = new THREE.HemisphereLight(directionalColor, fillColor, fillIntensity);
+  const sunsetLight = new THREE.DirectionalLight(
+    sunset.color,
+    sunset.intensity,
+  );
+  sunsetLight.position.copy(sunset.position);
+  sunsetLight.castShadow = true;
+  sunsetLight.shadow.mapSize.set(2048, 2048);
+  sunsetLight.shadow.camera.near = 0.5;
+  sunsetLight.shadow.camera.far = 120;
+  sunsetLight.shadow.camera.left = -40;
+  sunsetLight.shadow.camera.right = 40;
+  sunsetLight.shadow.camera.top = 40;
+  sunsetLight.shadow.camera.bottom = -40;
+  sunsetLight.shadow.bias = -0.0005;
+  scene.add(sunsetLight);
+
+  const rimLight = new THREE.DirectionalLight(
+    sunset.rimColor,
+    sunset.rimIntensity,
+  );
+  rimLight.position.copy(sunset.rimPosition);
+  scene.add(rimLight);
+
+  const hemi = new THREE.HemisphereLight(
+    sunset.color,
+    sunset.groundGlowColor,
+    fillIntensity + sunset.groundGlowIntensity,
+  );
   hemi.position.set(0, 10, 0);
   scene.add(hemi);
 
-  return { ambient, keyLight, hemi };
+  const fillHemi = new THREE.HemisphereLight(
+    directionalColor,
+    fillColor,
+    fillIntensity * 0.5,
+  );
+  fillHemi.position.set(0, -5, 0);
+  scene.add(fillHemi);
+
+  return { ambient, keyLight, sunsetLight, rimLight, hemi, fillHemi };
 };
