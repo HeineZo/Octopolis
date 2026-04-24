@@ -7,6 +7,8 @@
 
 <h4 align="center">Création + animation d'un poulpe via Blender, visualisation via ThreeJS avec environnement</h4>
 
+https://github.com/user-attachments/assets/97075292-c348-4a98-a2d4-dcae92a11a7a
+
 <p align="center">
   <a href="#🛠️-participer-au-développement">Participer</a> •
   <a href="#🕹️-technologies">Technologies</a> •
