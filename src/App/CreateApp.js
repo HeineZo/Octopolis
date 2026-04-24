@@ -14,13 +14,13 @@ import { startRenderLoop } from "@loop/StartRenderLoop";
 import { createLoopingMusic } from "@audio/CreateLoopingMusic";
 import { createCameraMoveSfx } from "@audio/CreateCameraMoveSfx";
 
-const OCTOPUS_URL = "/Octopolis.glb";
+const OCTOPUS_URL = "/models/Octopolis.glb";
 const FISH_URLS = [
-  "/clown_fish.glb",
-  "/fish1.glb",
-  "/fish2.glb",
-  "/fish3_metalrough.glb",
-  "/fish4.glb",
+  "/models/clown_fish.glb",
+  "/models/fish1.glb",
+  "/models/fish2.glb",
+  "/models/fish3_metalrough.glb",
+  "/models/fish4.glb",
 ];
 
 /**
@@ -28,9 +28,9 @@ const FISH_URLS = [
  */
 export const createApp = () => {
   createLoopingMusic({
-    src: "/Le Grand Bleu.mp3",
+    src: "/audio/Le Grand Bleu.mp3",
     volume: 0.6,
-    backgroundSrc: "/background_audio.mp3",
+    backgroundSrc: "/audio/background_audio.mp3",
     backgroundVolume: 0.22,
     title: "Activer la musique",
   }).start();
@@ -42,7 +42,7 @@ export const createApp = () => {
 
   const cameraMoveSfx = createCameraMoveSfx({
     controls,
-    src: encodeURI("/Underwater - Sound effect.mp3"),
+    src: encodeURI("/audio/Underwater - Sound effect.mp3"),
     volume: 0.4,
     fadeInMs: 220,
     fadeOutMs: 700,

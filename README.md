@@ -13,7 +13,7 @@
   <a href="#🤠-crédits">Crédit</a>
 </p>
 
-![Screenshot de l'application](/public/preview.png)
+![Démonstration](/public/misc/demo.mp4)
 
 ## 🛠️ Participer au développement
 
@@ -23,7 +23,7 @@ Pour clôner le projet et lancer l'application, vous aurez besoin d'installer [G
 
 ```bash
 # Clôner le projet
-$ git clone <URL_DU_REPO>
+$ git clone https://github.com/HeineZo/Octopolis.git
 
 # Se déplacer dans le projet
 $ cd Octopolis

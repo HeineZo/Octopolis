@@ -7,7 +7,7 @@ export const SCENE_CONFIG = {
   },
   background: {
     color: new THREE.Color(0x0a2a3a),
-    texturePath: "/background.jpeg",
+    texturePath: "/images/background.jpeg",
   },
   camera: {
     fov: 55,
