@@ -2,18 +2,45 @@
  * Démarre une musique en boucle. Si l'autoplay est bloqué, affiche un petit
  * bouton "Activer le son" qui lance la lecture sur interaction utilisateur.
  */
-export const createLoopingMusic = ({
-  src,
-  volume,
-  title,
-} = {}) => {
+export const createLoopingMusic = (
+  { src, volume, title, backgroundSrc, backgroundVolume } = {},
+) => {
   const audio = new Audio(src);
   audio.loop = true;
   audio.preload = "auto";
   audio.volume = typeof volume === "number" ? volume : 0.4;
 
+  const backgroundAudio =
+    typeof backgroundSrc === "string" ? new Audio(backgroundSrc) : null;
+
+  if (backgroundAudio) {
+    backgroundAudio.loop = true;
+    backgroundAudio.preload = "auto";
+    backgroundAudio.volume =
+      typeof backgroundVolume === "number" ? backgroundVolume : 0.22;
+  }
+
   /** @type {HTMLButtonElement | null} */
   let overlayButton = null;
+
+  const playAll = async () => {
+    if (!backgroundAudio) {
+      await audio.play();
+      return;
+    }
+
+    await Promise.all([audio.play(), backgroundAudio.play()]);
+  };
+
+  const pauseAll = () => {
+    audio.pause();
+    audio.currentTime = 0;
+
+    if (backgroundAudio) {
+      backgroundAudio.pause();
+      backgroundAudio.currentTime = 0;
+    }
+  };
 
   const removeOverlay = () => {
     if (!overlayButton) return;
@@ -46,7 +73,7 @@ export const createLoopingMusic = ({
 
     button.addEventListener("click", async () => {
       try {
-        await audio.play();
+        await playAll();
         removeOverlay();
       } catch (error) {
         console.warn("[Music] play still blocked:", error);
@@ -60,18 +87,20 @@ export const createLoopingMusic = ({
 
   const start = async () => {
     try {
-      await audio.play();
+      await playAll();
       removeOverlay();
       return { ok: true, value: undefined };
     } catch (error) {
       ensureOverlay();
-      return { ok: false, error: error instanceof Error ? error : new Error(String(error)) };
+      return {
+        ok: false,
+        error: error instanceof Error ? error : new Error(String(error)),
+      };
     }
   };
 
   const stop = () => {
-    audio.pause();
-    audio.currentTime = 0;
+    pauseAll();
     removeOverlay();
   };
 
@@ -81,9 +110,9 @@ export const createLoopingMusic = ({
 
   return {
     audio,
+    backgroundAudio,
     start,
     stop,
     setVolume,
   };
 };
-

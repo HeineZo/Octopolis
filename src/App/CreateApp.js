@@ -30,6 +30,8 @@ export const createApp = () => {
   createLoopingMusic({
     src: "/Le Grand Bleu.mp3",
     volume: 0.6,
+    backgroundSrc: "/background_audio.mp3",
+    backgroundVolume: 0.22,
     title: "Activer la musique",
   }).start();
 
@@ -41,7 +43,7 @@ export const createApp = () => {
   const cameraMoveSfx = createCameraMoveSfx({
     controls,
     src: encodeURI("/Underwater - Sound effect.mp3"),
-    volume: 0.28,
+    volume: 0.4,
     fadeInMs: 220,
     fadeOutMs: 700,
     maxDurationMs: 2000,
